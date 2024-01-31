@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-java-app
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      containers:
+      - name: java-app-container
+        image: {{ .Values.java.image.repository }}:{{ .Values.java.image.tag }}
+        ports:
+        - containerPort: {{ .Values.java.service.port }}
+        volumeMounts:
+        - name: java-app-config
+          mountPath: "/opt/config"
+        command: ["java", "-jar", "/app/java.jar", "--spring.config.location=/opt/config/application.properties", "--spring.profiles.active=mysql"]
+
+      volumes:
+      - name: java-app-config
+        configMap:
+          name: {{ .Release.Name }}-java-app-config

@@ -1,0 +1,36 @@
+# templates/java-app-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-java-app-config
+  namespace: {{ .Release.Namespace }}
+data:
+  application.properties: |
+    # database init, supports mysql too
+    database=mysql
+    spring.datasource.url={{ .Values.java.url }}
+    spring.datasource.username={{ .Values.java.username }}
+    spring.datasource.password={{ .Values.java.password }}
+    # SQL is written to be idempotent so this is safe
+    spring.sql.init.mode=always
+
+    # Web
+    spring.thymeleaf.mode=HTML
+
+    # JPA
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+    spring.jpa.open-in-view=true
+
+    # Internationalization
+    spring.messages.basename=messages/messages
+
+    # Actuator
+    management.endpoints.web.exposure.include=*
+    # Logging
+    #logging.config=classpath:logback-spring.xml
+    logging.level.org.springframework=INFO
+    # logging.level.org.springframework.web=DEBUG
+    # logging.level.org.springframework.context.annotation=TRACE
+
+    # Maximum time static resources should be cached
+    spring.web.resources.cache.cachecontrol.max-age=12h

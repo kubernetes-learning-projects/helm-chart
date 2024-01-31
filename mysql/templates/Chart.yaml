@@ -1,0 +1,4 @@
+apiVersion: v2
+name: java-app
+description: Helm chart to deploy MySQL DB
+version: 0.1.0

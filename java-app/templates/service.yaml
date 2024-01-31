@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-java-app-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    app: java-app
+  type: {{ .Values.java.service.type }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.java.service.port }}
+    targetPort: {{ .Values.java.service.targetPort }}
+    {{- if eq .Values.java.service.type "NodePort" }}
+    nodePort: {{ .Values.java.service.nodePort }}
+    {{- end }}

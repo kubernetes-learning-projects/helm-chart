@@ -1,0 +1,14 @@
+mysql:
+  replicaCount: 1
+  image:
+    repository: mysql
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 3306
+    targetPort: 3306
+    nodePort: 30244
+  username: crunchops
+  password: crunchOps@1234
+  database: petclinic

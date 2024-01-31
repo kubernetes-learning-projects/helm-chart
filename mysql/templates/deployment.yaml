@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-mysql
+  namespace: {{ .Release.Namespace }}
+spec:
+  serviceName: "{{ .Release.Name }}-mysql"
+  replicas: {{ .Values.mysql.replicaCount }}
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}
+        env:
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: "yes"
+        - name: MYSQL_DATABASE
+          value: {{ .Values.mysql.database }}
+        volumeMounts:
+        - name: mysql-config
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: mysql-config
+        configMap:
+          name: {{ .Release.Name }}-mysql-configmap
