@@ -1,6 +1,6 @@
 java:
   image:
-    repository: techiescamp/pet-clinic-app
+    repository: techiescamp/kube-petclinic-app
     tag: "1.0.0"
     pullPolicy: IfNotPresent
   replicaCount: 2
@@ -8,7 +8,7 @@ java:
     type: NodePort
     port: 8080
     targetPort: 8080
-    nodePort: 30144
+    nodePort: 30344
   url: jdbc:mysql://mysql-service.default.svc.cluster.local:3306/petclinic
   username: crunchops
   password: crunchOps@1234
