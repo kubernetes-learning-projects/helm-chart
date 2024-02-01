@@ -3,7 +3,7 @@ java:
     repository: techiescamp/kube-petclinic-app
     tag: "1.0.0"
     pullPolicy: IfNotPresent
-  replicaCount: 2
+  replicaCount: 1
   service:
     type: NodePort
     port: 8080
