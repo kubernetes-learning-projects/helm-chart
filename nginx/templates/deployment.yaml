@@ -20,3 +20,21 @@ spec:
         image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
         ports:
         - containerPort: {{ .Values.nginx.service.port }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-nginx-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    app: nginx
+  type: {{ .Values.nginx.service.type }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.nginx.service.port }}
+    targetPort: {{ .Values.nginx.service.targetPort }}
+    {{- if eq .Values.nginx.service.type "NodePort" }}
+    nodePort: {{ .Values.nginx.service.nodePort }}
+    {{- end }}
