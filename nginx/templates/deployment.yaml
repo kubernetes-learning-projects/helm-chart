@@ -19,7 +19,7 @@ spec:
       - name: nginx-container
         image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
         ports:
-        - containerPort: {{ .Values.nginx.service.port }}
+        - containerPort: 80
 
 ---
 apiVersion: v1
