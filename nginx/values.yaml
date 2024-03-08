@@ -1,0 +1,12 @@
+nginx:
+  image:
+    repository: 814200988517.dkr.ecr.us-west-2.amazonaws.com/dev
+    tag: "1.0.234"
+  replicaCount: 1
+  service:
+    type: NodePort
+    port: 80
+    targetPort: 80
+    nodePort: 30080
+
+
