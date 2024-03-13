@@ -1,7 +1,7 @@
 nginx:
   image:
     repository: aswinvj/nginx
-    tag: ""
+    tag: "1.0.3"
   replicaCount: 1
   service:
     type: NodePort
