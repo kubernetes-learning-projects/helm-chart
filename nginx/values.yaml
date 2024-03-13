@@ -1,6 +1,6 @@
 nginx:
   image:
-    repository: 814200988517.dkr.ecr.us-west-2.amazonaws.com/dev
+    repository: aswinvj/nginx
     tag: ""
   replicaCount: 1
   service:
