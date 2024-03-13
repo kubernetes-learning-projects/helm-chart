@@ -7,5 +7,5 @@ helm:
     value: aswinvj/nginx
     forcestring: true
   - name: image.tag
-    value: 1.0.3
+    value: 1.0.2
     forcestring: true
