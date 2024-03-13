@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-nginx-deployment
-  namespace: {{ .Release.Namespace }}
+  name: "{{ .Release.Name }}-nginx-deployment"
+  namespace: "{{ .Release.Namespace }}"
   labels:
-    app: nginx
+    app: "nginx"
 spec:
   replicas: {{ .Values.nginx.replicaCount }}
   selector:
     matchLabels:
-      app: nginx
+      app: "nginx"
   template:
     metadata:
       labels:
-        app: nginx
+        app: "nginx"
     spec:
       containers:
-      - name: nginx-container
-        image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
+      - name: "nginx-container"
+        image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
         ports:
         - containerPort: {{ .Values.nginx.service.port }}
 
@@ -25,12 +25,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-nginx-service
-  namespace: {{ .Release.Namespace }}
+  name: "{{ .Release.Name }}-nginx-service"
+  namespace: "{{ .Release.Namespace }}"
 spec:
   selector:
-    app: nginx
-  type: {{ .Values.nginx.service.type }}
+    app: "nginx"
+  type: "{{ .Values.nginx.service.type }}"
   ports:
   - protocol: TCP
     port: {{ .Values.nginx.service.port }}
