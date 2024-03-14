@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "nginx"
 spec:
-  replicas: {{ .Values.nginx.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: "nginx"
@@ -17,9 +17,9 @@ spec:
     spec:
       containers:
       - name: "nginx-container"
-        image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
-        - containerPort: {{ .Values.nginx.service.port }}
+        - containerPort: {{ .Values.service.port }}
 
 ---
 apiVersion: v1
@@ -30,11 +30,11 @@ metadata:
 spec:
   selector:
     app: "nginx"
-  type: "{{ .Values.nginx.service.type }}"
+  type: "{{ .Values.service.type }}"
   ports:
   - protocol: TCP
-    port: {{ .Values.nginx.service.port }}
-    targetPort: {{ .Values.nginx.service.targetPort }}
-    {{- if eq .Values.nginx.service.type "NodePort" }}
-    nodePort: {{ .Values.nginx.service.nodePort }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}
+    {{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ .Values.service.nodePort }}
     {{- end }}
