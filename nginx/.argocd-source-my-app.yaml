@@ -1,8 +1,0 @@
-helm:
-  parameters:
-  - name: nginx.image.name
-    value: aswinvj/nginx
-    forcestring: true
-  - name: nginx.image.tag
-    value: 1.0.1
-    forcestring: true
