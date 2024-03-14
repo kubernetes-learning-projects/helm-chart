@@ -1,8 +1,8 @@
 helm:
   parameters:
-  - name: image.name
+  - name: nginx.image.name
     value: aswinvj/nginx
     forcestring: true
-  - name: image.tag
+  - name: nginx.image.tag
     value: 1.0.4
     forcestring: true
